@@ -1,0 +1,25 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body {
+   background: hsl(240, 33%, 51%);
+}
+
+a {
+   text-decoration: none;
+}
+.logo {
+  animation: logo-spin infinite 20s linear;
+  height: 80px;
+}
+@Keyframes logo-spin {
+   from {
+   transform: rotate(0deg);
+   }
+   to {
+   transform: rotate(360deg);
+   }
+   }
