@@ -15,7 +15,11 @@ const Landing = () => {
     setLoading(true);
     try {
       const res = await fetch(
-        `http://hn.algolia.com/api/v1/search?query=${query}`
+        `http://hn.algolia.com/api/v1/search?query=${query}`,
+        {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        }
       );
       const { hits } = await res.json();
       setResults(hits);
@@ -41,8 +45,8 @@ const Landing = () => {
         alt="react-logo"
         className="float-right h-12 logo"
       />
-        <h1 className="text-grey-darkest font-semibold mb-2">Reactivity</h1>
-        <small className="italic">Search for the latest in react news!</small>
+      <h1 className="text-grey-darkest font-semibold mb-2">Reactivity</h1>
+      <small className="italic">Search for the latest in react news!</small>
       <form onSubmit={handleSearch} className="mb-3 p-2">
         <input
           type="text"
@@ -67,43 +71,45 @@ const Landing = () => {
         <h2 className="font-bold">loading...</h2>
       ) : (
         <ul className="list-reset leading-normal">
-          {results.map(({ url, title, objectID, points, author, num_comments }) => (
-            <li key={objectID}>
-              <div className="mb-5">
-                <h4>
-                  <a
-                    href={url}
-                    className="text-indigo-dark hover:text-indigo-light"
-                  >
-                    {title}
-                  </a>
-                </h4>
-                <div className="flex">
-                  <div className="mx-2">
-                    <img
-                      src="https://icon.now.sh/thumb_up/c0c"
-                      alt="react-logo"
-                    />
-                    <small className="font-bold">{points}</small>
-                  </div>
-                  <div className="mx-2">
-                    <img
-                      src="https://icon.now.sh/edit/6B8E23"
-                      alt="react-logo"
-                    />
-                    <small className="font-bold">{author}</small>
-                  </div>
-                  <div className="mx-2">
-                    <img
-                      src="https://icon.now.sh/mode_comment/3397FF"
-                      alt="react-logo"
-                    />
-                    <small className="font-bold">{num_comments}</small>
+          {results.map(
+            ({ url, title, objectID, points, author, num_comments }) => (
+              <li key={objectID}>
+                <div className="mb-5">
+                  <h4>
+                    <a
+                      href={url}
+                      className="text-indigo-dark hover:text-indigo-light"
+                    >
+                      {title}
+                    </a>
+                  </h4>
+                  <div className="flex">
+                    <div className="mx-2">
+                      <img
+                        src="https://icon.now.sh/thumb_up/c0c"
+                        alt="react-logo"
+                      />
+                      <small className="font-bold">{points}</small>
+                    </div>
+                    <div className="mx-2">
+                      <img
+                        src="https://icon.now.sh/edit/6B8E23"
+                        alt="react-logo"
+                      />
+                      <small className="font-bold">{author}</small>
+                    </div>
+                    <div className="mx-2">
+                      <img
+                        src="https://icon.now.sh/mode_comment/3397FF"
+                        alt="react-logo"
+                      />
+                      <small className="font-bold">{num_comments}</small>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </li>
-          ))}
+              </li>
+            )
+          )}
         </ul>
       )}
       {error && <div>{error.message}</div>}
