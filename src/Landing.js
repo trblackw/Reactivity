@@ -39,7 +39,7 @@ const Landing = () => {
     searchInputRef.current.focus();
   };
   return (
-    <div className="container max-w-md mx-auto p-4 m-2 bg-purple-lightest shadow-lg rounded">
+    <div className="container max-w-md mx-auto p-4 m-2 bg-white shadow-lg rounded">
       <img
         src="https://icon.now.sh/react/c0c"
         alt="react-logo"
